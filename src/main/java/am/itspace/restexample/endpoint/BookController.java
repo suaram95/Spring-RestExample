@@ -32,6 +32,7 @@ public class BookController {
         if (book.getId() > 0) {
             throw new RuntimeException("Id must be 0");
         }
+
         return bookRepository.save(book);
     }
 
@@ -43,7 +44,7 @@ public class BookController {
         bookFromDB.setTitle(book.getTitle());
         bookFromDB.setDescription(book.getDescription());
         bookFromDB.setPrice(book.getPrice());
-        bookFromDB.setUser(book.getUser());
+        bookFromDB.setAuthorName(book.getAuthorName());
         return bookRepository.save(bookFromDB);
     }
 

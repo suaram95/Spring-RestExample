@@ -12,19 +12,17 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name="book")
+@Table(name = "user")
+public class User {
 
-public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column
     private int id;
-    @Column
-    private String title;
-    @Column
-    private String description;
-    @Column
-    private double price;
-    @Column
-    private String authorName;
+    private String name;
+    private String surname;
+    private String email;
+    private String password;
+    @Enumerated(value = EnumType.STRING)
+    private UserType userType=UserType.USER;
+
 }
