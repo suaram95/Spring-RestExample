@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/rest20?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: root
+    password: root
+
+#File size config
+  servlet:
+    multipart:
+        max-file-size: 128MB
+        max-request-size: 128MB
+        enabled: true
+server:
+  port: 8081
+
+#jwt
+jwt:
+  secret: JHS*2kl-$$7opk
+  expiration: 6000000
+  header: Authorization
+

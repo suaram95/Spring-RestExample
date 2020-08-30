@@ -4,6 +4,7 @@ package am.itspace.restexample.endpoint;
 import am.itspace.restexample.exception.ResourceNotFoundException;
 import am.itspace.restexample.model.Book;
 import am.itspace.restexample.repository.BookRepository;
+import am.itspace.restexample.service.BookService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,16 +15,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookController {
 
-    private final BookRepository bookRepository;
+    private final BookService bookService;
 
     @GetMapping("/books")
     public List<Book> getBooks() {
-        return bookRepository.findAll();
+        return bookService.findAll();
     }
 
     @GetMapping("/book/{id}")
     public Book getById( @PathVariable("id") int id){
-        return bookRepository.findById(id).
+        return bookService.findById(id).
                 orElseThrow(() -> new ResourceNotFoundException("Book does not exist"));
     }
 
@@ -33,24 +34,24 @@ public class BookController {
             throw new RuntimeException("Id must be 0");
         }
 
-        return bookRepository.save(book);
+        return bookService.save(book);
     }
 
     @PutMapping("/books/{id}")
     public Book update(@RequestBody Book book, @PathVariable("id") int id) {
 
-        Book bookFromDB = bookRepository.findById(id).
+        Book bookFromDB = bookService.findById(id).
                 orElseThrow(() -> new ResourceNotFoundException("Book does not exist"));
         bookFromDB.setTitle(book.getTitle());
         bookFromDB.setDescription(book.getDescription());
         bookFromDB.setPrice(book.getPrice());
         bookFromDB.setAuthorName(book.getAuthorName());
-        return bookRepository.save(bookFromDB);
+        return bookService.save(bookFromDB);
     }
 
     @DeleteMapping("/books/{id}")
     public void delete(@PathVariable("id") int id){
-        bookRepository.delete(bookRepository.findById(id).
+        bookService.delete(bookService.findById(id).
                 orElseThrow(() -> new ResourceNotFoundException("Book does not exist")));
     }
 
