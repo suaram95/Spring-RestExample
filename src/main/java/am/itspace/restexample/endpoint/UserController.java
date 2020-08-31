@@ -28,6 +28,7 @@ public class UserController {
     private final JWTTokenUtil tokenUtil;
     private final ModelMapper modelMapper;
 
+
     @PostMapping("/user/auth")
     public ResponseEntity auth(@RequestBody AuthRequest authRequest){
         Optional<User> byEmail = userService.findByEmail(authRequest.getEmail());
